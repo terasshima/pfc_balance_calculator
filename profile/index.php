@@ -10,7 +10,7 @@
   $link = mysqli_connect($db_hostname,$db_username,$db_password,$db_name);
 
   if(mysqli_connect_error()){
-    echo '<script type="text/javascript">alert("データベースに接続できませんでした");</script>';
+    alert("データベースに接続できませんでした");
     require_once("../home/index.php");
     exit;
   }else{

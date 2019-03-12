@@ -1,7 +1,7 @@
 <?php
 
 
-  //ユーザ関数読み込み
+  //ユーザ関数
   require("../function.php");
 
 
@@ -40,7 +40,6 @@
   $gender = $_POST["gender"];
   $level = $_POST["level"];
   $purpose = $_POST["purpose"];
-
 
 
 
@@ -91,27 +90,27 @@
   $bmi = round($weight / ($heightMeter * $heightMeter),1);
 
   switch($bmi){
-    case $bmi < 18.5;
+    case $bmi < 18.5:
       $bmi = $bmi."（痩せすぎ）";
       break;
 
-    case $bmi >= 18.5 && $bmi < 25;
+    case $bmi >= 18.5 && $bmi < 25:
       $bmi = $bmi."（標準）";
       break;
 
-    case $bmi >= 25 && $bmi < 30;
+    case $bmi >= 25 && $bmi < 30:
       $bmi = $bmi."（肥満I度）";
       break;
 
-    case $bmi >= 30 && $bmi < 35;
+    case $bmi >= 30 && $bmi < 35:
       $bmi = $bmi."（肥満Ⅱ度）";
       break;
 
-    case $bmi >= 35 && $bmi < 40;
+    case $bmi >= 35 && $bmi < 40:
       $bmi = $bmi."（肥満Ⅲ度）";
       break;
 
-    case $bmi >= 40;
+    case $bmi >= 40:
       $bmi = $bmi."（肥満Ⅳ度）";
       break;
   }
@@ -128,15 +127,24 @@
 
 
   //消費カロリー／日
-  if($level == 0){
-    $burn = round($basal * 1.3); //低い
-  }elseif($level == 1){
-    $burn = round($basal * 1.5); //やや低い
-  }elseif($level == 2){
-    $burn = round($basal * 1.7); //適度
-  }else{
-    $burn = round($basal * 1.9); //高い
+  switch($level){
+    case 0:
+      $burn = round($basal * 1.3); //低い
+      break;
+
+    case 1:
+      $burn = round($basal * 1.5); //やや低い
+      break;
+
+    case 2:
+      $burn = round($basal * 1.7); //適度
+      break;
+
+    case 3:
+      $burn = round($basal * 1.9); //高い
+      break;
   }
+
 
 
 

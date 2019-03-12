@@ -1,5 +1,6 @@
 <?php
 
+
   //セッション開始
   if(!isset($_SESSION)){
     session_start();
@@ -12,7 +13,7 @@
   }
 
 
-  //表示のため言葉に変換
+
   //性別
   if($_SESSION["gender"]==0){
     $genderWord = "男性";
@@ -20,16 +21,28 @@
     $genderWord = "女性";
   }
 
+
+
   //生活レベル
-  if($_SESSION["level"]==0){
-    $levelWord = "低い";
-  }elseif($_SESSION["level"]==1){
-    $levelWord = "やや低い";
-  }elseif($_SESSION["level"]==2){
-    $levelWord = "適度";
-  }else{
-    $levelWord = "高い";
+  switch($_SESSION["level"]){
+    case 0:
+      $levelWord = "低い";
+      break;
+
+    case 1:
+      $levelWord = "やや低い";
+      break;
+
+    case 2:
+      $levelWord = "適度";
+      break;
+
+    case 3:
+      $levelWord = "高い";
+      break;
   }
+
+
 
   //目的
   if($_SESSION["purpose"]==0){

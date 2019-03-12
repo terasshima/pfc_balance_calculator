@@ -14,7 +14,8 @@
   $link = mysqli_connect($db_hostname,$db_username,$db_password,$db_name);
 
   if(mysqli_connect_error()){
-    input_error("データベースに接続できませんでした");
+    alert("データベースに接続できませんでした");
+    goto jump;
   }else{
     mysqli_set_charset($link, 'utf8');
   }
@@ -40,7 +41,8 @@
   if(mysqli_num_rows($result) > 0){
     $row = mysqli_fetch_array($result); //email ◯
   }else{
-    input_error("入力されたメールアドレスは登録されていません"); //email ×
+    alert("入力されたメールアドレスは登録されていません"); //email ×
+    goto jump;
   }
 
 
@@ -55,10 +57,16 @@
     header('location:../home/index.php');
     exit;
   }else{
-    input_error("パスワードが間違っています"); //pass ×
+    alert("パスワードが間違っています"); //pass ×
+    goto jump;
   }
 
 
+
+  //ジャンプ先
+  jump:
+  require_once("index.php");
+  exit;
 
 
 ?>

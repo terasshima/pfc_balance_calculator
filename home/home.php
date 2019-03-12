@@ -24,19 +24,22 @@
 
     //入力漏れがないか
     if(!$protein || !$fat || !$carb){
-      input_error("数値を入力してください");
+      alert("数値を入力してください");
+      goto jump;
     }
 
 
     //数値か
     if(!is_numeric($protein) || !is_numeric($fat) || !is_numeric($carb)){
-      input_error("数値を正しく入力してください");
+      alert("数値を正しく入力してください");
+      goto jump;
     }
 
 
     //有効な数値か
     if($protein < 0 || $fat < 0 || $carb < 0){
-      input_error("数値を正しく入力してください");
+      alert("数値を正しく入力してください");
+      goto jump;
     }
 
 
@@ -54,19 +57,22 @@
 
     //入力漏れがないか
     if(!$protein || !$fat || !$kcal){
-      input_error("数値を入力してください");
+      alert("数値を入力してください");
+      goto jump;
     }
 
 
     //数値か
     if(!is_numeric($protein) || !is_numeric($fat) || !is_numeric($kcal)){
-      input_error("数値を正しく入力してください");
+      alert("数値を正しく入力してください");
+      goto jump;
     }
 
 
     //有効な数値か
     if($protein < 0 || $fat < 0 || $kcal < ($protein * 4) + ($fat * 9)){
-      input_error("数値を正しく入力してください");
+      alert("数値を正しく入力してください");
+      goto jump;
     }
 
 
@@ -77,7 +83,8 @@
 
   }else{
     //計算方法不明
-    input_error("計算方法の取得に失敗しました");
+    alert("計算方法の取得に失敗しました");
+    goto jump;
   }
 
 
@@ -93,6 +100,12 @@
   header('location:../result/index.php');
   exit;
 
+
+
+  //ジャンプ先
+  jump:
+  require_once("index.php");
+  exit;
 
 
 

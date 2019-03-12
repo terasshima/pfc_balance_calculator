@@ -10,7 +10,7 @@
   $link = mysqli_connect($db_hostname,$db_username,$db_password,$db_name);
 
   if(mysqli_connect_error()){
-    echo '<script type="text/javascript">alert("データベースに接続できませんでした");</script>';
+    alert("データベースに接続できませんでした");
     require_once("../home/index.php");
     exit;
   }else{
@@ -52,7 +52,7 @@
     $comment = "今日は摂取エネルギーが多かったようです。<br>でも、明日以降でセーブすれば大丈夫です。
                 <br class='br1'>一日単位より一週間単位で目標値に近づけましょう！";
   }else{
-    echo '<script type="text/javascript">alert("コメントの取得に失敗しました");</script>';
+    alert("コメントの取得に失敗しました");
   }
 
 
@@ -66,7 +66,7 @@
     $comment1 = "摂取量が多かったようです。<br>タンパク質は体に必要な栄養素ですが、<br class='br1'>過剰な摂取は思わぬ病気に繋がることもあります。
                 <br>多くても【体重 × 2g／日】以内で摂取しましょう。";
   }else{
-    echo '<script type="text/javascript">alert("コメントの取得に失敗しました");</script>';
+    alert("コメントの取得に失敗しました");
   }
 
 
@@ -80,7 +80,7 @@
     $comment2 = "摂取量が多かったようです。<br>脂質は他の栄養素よりエネルギーが高く、<br class='br1'>摂りすぎは肥満や糖尿病などの原因となります。
                 <br>なるべく目標の数値に近づけるよう意識しましょう。";
   }else{
-    echo '<script type="text/javascript">alert("コメントの取得に失敗しました");</script>';
+    alert("コメントの取得に失敗しました");
   }
 
 
@@ -94,7 +94,7 @@
     $comment3 = "摂取量が多かったようです。<br>糖質の摂りすぎは<br class='br2'>動脈硬化や糖尿病などの原因となります。<br>
                 なるべく目標の数値に近づけるよう意識しましょう。";
   }else{
-    echo '<script type="text/javascript">alert("コメントの取得に失敗しました");</script>';
+    alert("コメントの取得に失敗しました");
   }
 
 

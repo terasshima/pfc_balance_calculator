@@ -1,7 +1,7 @@
 <?php
 
 
-  //ユーザ関数読み込み
+  //ユーザ関数
   require("../function.php");
 
 
@@ -14,7 +14,8 @@
   $link = mysqli_connect($db_hostname,$db_username,$db_password,$db_name);
 
   if(mysqli_connect_error()){
-    input_error("データベースに接続できませんでした");
+    alert("データベースに接続できませんでした");
+    goto jump;
   }else{
     mysqli_set_charset($link, 'utf8');
   }
@@ -39,7 +40,7 @@
   //登録 → パスワードをハッシュ化,データベース登録
   if(isset($_POST["next"])){
     $pass = password_hash($_SESSION["pass"],PASSWORD_DEFAULT);
-    $query = "INSERT INTO `users` (`name`, `email`, `pass`, `age`, `height`, `weight`, `gender`, `level`, `purpose`,
+    $query = "INSERT INTO `users` (`name`, `email`, `pass`, `age`, `height`,`weight`, `gender`, `level`, `purpose`,
                                     `bmi`, `basal`, `burn`, `cal`, `protein`, `fat`, `carb`)
               VALUES ('".mysqli_real_escape_string($link, $_SESSION["name"])."',
                        '".mysqli_real_escape_string($link, $_SESSION["email"])."',
@@ -64,10 +65,17 @@
       exit;
 
     }else{
-      input_error("登録に失敗しました"); //登録失敗
+      alert("登録に失敗しました"); //登録失敗
+      goto jump;
     }
 
   }
+
+
+  //ジャンプ先
+  jump:
+  require_once("index.php");
+  exit;
 
 
  ?>
