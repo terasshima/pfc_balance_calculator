@@ -1,5 +1,6 @@
 <?php
 
+
   //データベース接続,確認,文字化け防止
   $db_hostname = getenv("DB_HOSTNAME");
   $db_username = getenv("DB_USERNAME");

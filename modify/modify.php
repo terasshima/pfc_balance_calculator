@@ -1,5 +1,6 @@
 <?php
 
+
   //ユーザ関数読み込み
   require("../function.php");
 
@@ -13,8 +14,7 @@
   $link = mysqli_connect($db_hostname,$db_username,$db_password,$db_name);
 
   if(mysqli_connect_error()){
-    echo '<script type="text/javascript">alert("データベースに接続できませんでした");</script>';
-    require_index();
+    input_error("データベースに接続できませんでした");
   }else{
     mysqli_set_charset($link, 'utf8');
   }
@@ -36,8 +36,7 @@
       $_SESSION["name"] = $name;
       echo '<script type="text/javascript">alert("名前を変更しました");</script>';
     }else{
-      echo '<script type="text/javascript">alert("名前を変更できませんでした");</script>';
-      require_index();
+      input_error("名前を変更できませんでした");
     }
   }
 
@@ -51,8 +50,7 @@
     $result = mysqli_query($link, $query);
 
     if(mysqli_num_rows($result) > 0){
-      echo '<script type="text/javascript">alert("入力されたメールアドレスはすでに登録されています");</script>';
-      require_index();
+      input_error("入力されたメールアドレスはすでに登録されています");
     }else{
       $query = "UPDATE `users` SET `email` = '".$email."' WHERE `email` = '".mysqli_real_escape_string($link, $_SESSION["email"])."'";
       $result = mysqli_query($link, $query);
@@ -63,8 +61,7 @@
         echo '<script type="text/javascript">alert("メールアドレスを変更しました");</script>';
 
       }else{
-      echo '<script type="text/javascript">alert("メールアドレスを変更できませんでした");</script>';
-      require_index();
+        input_error("メールアドレスを変更できませんでした");
       }
     }
   }
@@ -83,13 +80,11 @@
         echo '<script type="text/javascript">alert("パスワードを変更しました");</script>';
 
       }else{
-      echo '<script type="text/javascript">alert("パスワードを変更できませんでした");</script>';
-      require_index();
+        input_error("パスワードを変更できませんでした");
       }
 
     }else{
-      echo '<script type="text/javascript">alert("パスワードが一致していません");</script>';
-      require_index();
+      input_error("パスワードが一致していません");
     }
   }
 
@@ -101,8 +96,7 @@
   if($_POST["age"]){
     //数値か,5~120歳か
     if(!is_numeric($_POST["age"]) || $_POST["age"] < 5 || $_POST["age"] > 120){
-      echo '<script type="text/javascript">alert("年齢を正しく入力してください");</script>';
-      require_index();
+      input_error("年齢を正しく入力してください");
     }else{
       $query = "UPDATE `users` SET `age` = '".$_POST["age"]."' WHERE `email` = '".mysqli_real_escape_string($link, $_SESSION["email"])."'";
       $result = mysqli_query($link, $query);
@@ -111,8 +105,7 @@
         echo '<script type="text/javascript">alert("年齢を変更しました");</script>';
 
       }else{
-        echo '<script type="text/javascript">alert("年齢を変更できませんでした");</script>';
-        require_index();
+        input_error("年齢を変更できませんでした");
       }
     }
   }
@@ -123,8 +116,7 @@
   if($_POST["height"]){
     //数値か,100.0~200.0cmか
     if(!is_numeric($_POST["height"]) || $_POST["height"] < 100.0 || $_POST["height"] >200.0){
-      echo '<script type="text/javascript">alert("身長を正しく入力してください");</script>';
-      require_index();
+      input_error("身長を正しく入力してください");
     }else{
       $query = "UPDATE `users` SET `height` = '".$_POST["height"]."' WHERE `email` = '".mysqli_real_escape_string($link, $_SESSION["email"])."'";
       $result = mysqli_query($link, $query);
@@ -133,8 +125,7 @@
         echo '<script type="text/javascript">alert("身長を変更しました");</script>';
 
       }else{
-        echo '<script type="text/javascript">alert("身長を変更できませんでした");</script>';
-        require_index();
+        input_error("身長を変更できませんでした");
       }
     }
   }
@@ -145,8 +136,8 @@
   if($_POST["weight"]){
     //数値か,15.0~500.0kgか
     if(!is_numeric($_POST["weight"]) || $_POST["weight"] < 15.0 || $_POST["weight"] >500.0){
-      echo '<script type="text/javascript">alert("体重を正しく入力してください");</script>';
-      require_index();
+      input_error("体重を正しく入力してください");
+
     }else{
       $query = "UPDATE `users` SET `weight` = '".$_POST["weight"]."' WHERE `email` = '".mysqli_real_escape_string($link, $_SESSION["email"])."'";
       $result = mysqli_query($link, $query);
@@ -155,8 +146,7 @@
         echo '<script type="text/javascript">alert("体重を変更しました");</script>';
 
       }else{
-        echo '<script type="text/javascript">alert("体重を変更できませんでした");</script>';
-        require_index();
+        input_error("体重を変更できませんでした");
       }
     }
   }
@@ -172,8 +162,7 @@
       echo '<script type="text/javascript">alert("性別を変更しました");</script>';
 
     }else{
-      echo '<script type="text/javascript">alert("性別を変更できませんでした");</script>';
-      require_index();
+      input_error("性別を変更できませんでした");
     }
   }
 
@@ -187,8 +176,7 @@
       echo '<script type="text/javascript">alert("活動レベルを変更しました");</script>';
 
     }else{
-      echo '<script type="text/javascript">alert("活動レベルを変更できませんでした");</script>';
-      require_index();
+      input_error("活動レベルを変更できませんでした");
     }
   }
 
@@ -202,8 +190,7 @@
       echo '<script type="text/javascript">alert("目的を変更しました");</script>';
 
     }else{
-      echo '<script type="text/javascript">alert("目的を変更できませんでした");</script>';
-      require_index();
+      input_error("目的を変更できませんでした");
     }
   }
 
@@ -248,8 +235,7 @@
       echo '<script type="text/javascript">alert("BMI値を変更しました");</script>';
 
     }else{
-      echo '<script type="text/javascript">alert("BMI値を変更できませんでした");</script>';
-      require_index();
+      input_error("BMI値を変更できませんでした");
     }
   }
 
@@ -276,8 +262,7 @@
       echo '<script type="text/javascript">alert("基礎代謝量を変更しました");</script>';
 
     }else{
-      echo '<script type="text/javascript">alert("基礎代謝量を変更できませんでした");</script>';
-      require_index();
+      input_error("基礎代謝量を変更できませんでした");
     }
   }else{
     $basal = $row["basal"];
@@ -306,8 +291,7 @@
       echo '<script type="text/javascript">alert("消費エネルギー量を変更しました");</script>';
 
     }else{
-      echo '<script type="text/javascript">alert("消費エネルギー量を変更できませんでした");</script>';
-      require_index();
+      input_error("消費エネルギー量を変更できませんでした");
     }
   }else{
     $burn = $row["burn"];
@@ -350,14 +334,12 @@
       echo '<script type="text/javascript">alert("目標摂取エネルギー量、PFCバランスを変更しました");</script>';
 
     }else{
-      echo '<script type="text/javascript">alert("目標摂取エネルギー量、PFCバランスを変更できませんでした");</script>';
-      require_index();
+      input_error("目標摂取エネルギー量、PFCバランスを変更できませんでした");
     }
   }
 
 
-
-  require_index();
+  input_error();
 
 
 ?>

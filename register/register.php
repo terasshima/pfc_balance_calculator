@@ -1,5 +1,6 @@
 <?php
 
+
   //ユーザ関数読み込み
   require("../function.php");
 
@@ -13,8 +14,7 @@
   $link = mysqli_connect($db_hostname,$db_username,$db_password,$db_name);
 
   if(mysqli_connect_error()){
-    echo '<script type="text/javascript">alert("データベースに接続できませんでした");</script>';
-    require_index();
+    input_error("データベースに接続できませんでした");
   }else{
     mysqli_set_charset($link, 'utf8');
   }
@@ -47,36 +47,31 @@
   $query = "SELECT `id` FROM `users` WHERE `email` = '".mysqli_real_escape_string($link, $email)."'";
   $result = mysqli_query($link, $query);
   if(mysqli_num_rows($result) > 0){
-    echo '<script type="text/javascript">alert("入力されたメールアドレスはすでに登録されています");</script>';
-    require_index();
+    input_error("入力されたメールアドレスはすでに登録されています");
   }
 
 
   //2つのpassが一致しているか
   if($pass1 != $pass2){
-    echo '<script type="text/javascript">alert("パスワードが一致していません");</script>';
-    require_index();
+    input_error("パスワードが一致していません");
   }
 
 
   //年齢に数値が入力されているか,5~120歳か
   if(!is_numeric($age) || $age < 5 || $age > 120){
-    echo '<script type="text/javascript">alert("年齢を正しく入力してください");</script>';
-    require_index();
+    input_error("年齢を正しく入力してください");
   }
 
 
   //身長に数値が入力されているか,100.0~200.0cmか
   if(!is_numeric($height) || $height < 100.0 || $height >200.0){
-    echo '<script type="text/javascript">alert("身長を正しく入力してください");</script>';
-    require_index();
+    input_error("身長を正しく入力してください");
   }
 
 
   //体重に数値が入力されているか,15.0~500.0kgか
   if(!is_numeric($weight) || $weight < 15.0 || $weight >500.0){
-    echo '<script type="text/javascript">alert("体重を正しく入力してください");</script>';
-    require_index();
+    input_error("体重を正しく入力してください");
   }
 
 
@@ -85,71 +80,74 @@
 
 
 
-  //BMI値 function
+  //BMI値 + コメント
   $heightMeter = $height / 100;
   $bmi = round($weight / ($heightMeter * $heightMeter),1);
-  //コメント付け足し case
-  if($bmi < 18.5){
-    $bmi = $bmi."（痩せすぎ）";
-  }elseif($bmi >= 18.5 && $bmi < 25){
-    $bmi = $bmi."（標準）";
-  }elseif($bmi >= 25 && $bmi < 30){
-    $bmi = $bmi."（肥満I度）";
-  }elseif($bmi >= 30 && $bmi < 35){
-    $bmi = $bmi."（肥満Ⅱ度）";
-  }elseif($bmi >= 35 && $bmi < 40){
-    $bmi = $bmi."（肥満Ⅲ度）";
-  }elseif($bmi >= 40){
-    $bmi = $bmi."（肥満Ⅳ度）";
+
+  switch($bmi){
+    case $bmi < 18.5;
+      $bmi = $bmi."（痩せすぎ）";
+      break;
+
+    case $bmi >= 18.5 && $bmi < 25;
+      $bmi = $bmi."（標準）";
+      break;
+
+    case $bmi >= 25 && $bmi < 30;
+      $bmi = $bmi."（肥満I度）";
+      break;
+
+    case $bmi >= 30 && $bmi < 35;
+      $bmi = $bmi."（肥満Ⅱ度）";
+      break;
+
+    case $bmi >= 35 && $bmi < 40;
+      $bmi = $bmi."（肥満Ⅲ度）";
+      break;
+
+    case $bmi >= 40;
+      $bmi = $bmi."（肥満Ⅳ度）";
+      break;
   }
 
 
 
   //基礎代謝量／日
   if($gender == 0){
-    //男性
-    $basal = round(66 + 13.7 * $weight + 5 * $height - 6.8 * $age);
+    $basal = round(66 + 13.7 * $weight + 5 * $height - 6.8 * $age); //男性
   }else{
-    //女性
-    $basal = round(665 + 9.6 * $weight + 1.7 *$height - 7 * $age);
+    $basal = round(665 + 9.6 * $weight + 1.7 *$height - 7 * $age); //女性
   }
 
 
 
   //消費カロリー／日
   if($level == 0){
-    //低い
-    $burn = round($basal * 1.3);
+    $burn = round($basal * 1.3); //低い
   }elseif($level == 1){
-    //やや低い
-    $burn = round($basal * 1.5);
+    $burn = round($basal * 1.5); //やや低い
   }elseif($level == 2){
-    //適度
-    $burn = round($basal * 1.7);
+    $burn = round($basal * 1.7); //適度
   }else{
-    //高い
-    $burn = round($basal * 1.9);
+    $burn = round($basal * 1.9); //高い
   }
 
 
 
   //目標摂取カロリー／日
   if($purpose == 0){
-    //減量
-    $targetCal = round($burn * 0.8);
+    $targetCal = round($burn * 0.8); //減量
   }elseif($purpose == 1){
-    //維持
-    $targetCal = round($burn * 1);
+    $targetCal = round($burn * 1); //維持
   }else{
-    //増量
-    $targetCal = round($burn * 1.2);
+    $targetCal = round($burn * 1.2); //増量
   }
 
 
 
   //目標摂取タンパク質量／日
   $targetPCal = $targetCal * 0.2;
-  $targetP = round($targetPCal / 4, 1); //function
+  $targetP = round($targetPCal / 4, 1);
 
   //目標摂取脂質量／日
   $targetFCal = $targetCal * 0.3;
@@ -161,9 +159,9 @@
 
 
 
-  //セッションの初期化
+  //セッションの初期化,格納
+  $_SESSION = array();
 
-  //入力内容,計算結果をセッションに代入
   $_SESSION["name"] = $_POST["name"];
   $_SESSION["email"] = $email;
   $_SESSION["pass"] = $pass1;

@@ -1,5 +1,6 @@
 <?php
 
+
   //ユーザ関数読み込み
   require("../function.php");
 
@@ -15,8 +16,7 @@
   $calculationMethod = $_POST["calculationMethod"];
 
 
-  if($calculationMethod == "byCarb"){
-    //P F C で計算する場合
+  if($calculationMethod == "byCarb"){ //P F C で計算する
     $protein = $_POST["PbyCarb"];
     $fat = $_POST["FbyCarb"];
     $carb = $_POST["CbyCarb"];
@@ -24,22 +24,19 @@
 
     //入力漏れがないか
     if(!$protein || !$fat || !$carb){
-      echo '<script type="text/javascript">alert("数値を入力してください");</script>';
-      require_index();
+      input_error("数値を入力してください");
     }
 
 
     //数値か
     if(!is_numeric($protein) || !is_numeric($fat) || !is_numeric($carb)){
-      echo '<script type="text/javascript">alert("数値を正しく入力してください");</script>';
-      require_index();
+      input_error("数値を正しく入力してください");
     }
 
 
     //有効な数値か
     if($protein < 0 || $fat < 0 || $carb < 0){
-      echo '<script type="text/javascript">alert("数値を正しく入力してください");</script>';
-      require_index();
+      input_error("数値を正しく入力してください");
     }
 
 
@@ -49,8 +46,7 @@
 
 
 
-  }elseif($calculationMethod == "byCal"){
-    //P F kcal で計算する場合
+  }elseif($calculationMethod == "byCal"){ //P F kcal で計算する
     $protein = $_POST["PbyCal"];
     $fat = $_POST["FbyCal"];
     $kcal = round($_POST["kcal"]);
@@ -58,22 +54,19 @@
 
     //入力漏れがないか
     if(!$protein || !$fat || !$kcal){
-      echo '<script type="text/javascript">alert("数値を入力してください");</script>';
-      require_index();
+      input_error("数値を入力してください");
     }
 
 
     //数値か
     if(!is_numeric($protein) || !is_numeric($fat) || !is_numeric($kcal)){
-      echo '<script type="text/javascript">alert("数値を正しく入力してください");</script>';
-      require_index();
+      input_error("数値を正しく入力してください");
     }
 
 
     //有効な数値か
     if($protein < 0 || $fat < 0 || $kcal < ($protein * 4) + ($fat * 9)){
-      echo '<script type="text/javascript">alert("数値を正しく入力してください");</script>';
-      require_index();
+      input_error("数値を正しく入力してください");
     }
 
 
@@ -84,8 +77,7 @@
 
   }else{
     //計算方法不明
-    echo '<script type="text/javascript">alert("計算方法の取得に失敗しました");</script>';
-    require_index();
+    input_error("計算方法の取得に失敗しました");
   }
 
 
