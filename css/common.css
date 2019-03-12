@@ -1,0 +1,149 @@
+
+
+/* 全ページ共通 */
+
+/* navbar */
+.toppage-link, .dropdown-toggle, .dropdown-item{
+  font-size:70%;
+}
+
+/* main */
+.titles, .contents{
+  padding-top:30px;
+  padding-bottom:30px;
+}
+
+hr{
+  margin-top:20px;
+  margin-bottom:30px;
+}
+
+/* notice */
+.notice p{
+  font-size:10px;
+  line-height:15px;
+}
+
+/* footer */
+.bottom-btn{
+  margin-top:50px;
+}
+
+
+
+h1{
+  font-size:24px;
+}
+
+h2{
+  font-size:20px;
+}
+
+h4{
+  font-size:16px;
+}
+
+p{
+  font-size:13px;
+  line-height:20px;
+}
+
+.labels{
+  font-size:13px;
+}
+
+
+/* レスポンシブ */
+/*  幅480以下（スマホ縦）はそのまま */
+
+
+@media screen and (min-width:480px) {
+  h1{
+    font-size:28px;
+  }
+  h2{
+    font-size:24px;
+  }
+  h4{
+    font-size:20px;
+  }
+
+  h6{
+    font-size:17px;
+  }
+
+  p{
+    font-size:14px;
+    line-height:30px;
+  }
+  .labels{
+    font-size:14px;
+  }
+  .titles, .contents{
+    padding-top:40px;
+    padding-bottom:40px;
+  }
+  .notice p{
+    font-size:12px;
+    line-height:17px;
+  }
+  hr{
+    margin-top:30px;
+    margin-bottom:40px;
+  }
+  .toppage-link, .dropdown-toggle, .dropdown-item{
+    font-size:85%;
+  }
+  .back-to-top{
+    display:none;
+  }
+
+}
+
+@media screen and (min-width:768px) {
+  .br2{
+    display:none;
+  }
+
+}
+
+@media screen and (min-width:1024px) {
+  h1{
+    font-size:34px;
+  }
+  h2{
+    font-size:30px;
+  }
+  h4{
+    font-size:24px;
+  }
+  h6{
+    font-size:19px;
+  }
+  p{
+    font-size:16px;
+    line-height:30px;
+  }
+  .br1{
+    display:none;
+  }
+  .labels{
+    font-size:16px;
+  }
+  .titles, .contents{
+    padding-top:50px;
+    padding-bottom:50px;
+  }
+  .notice p{
+    font-size:14px;
+    line-height:19px;
+  }
+  hr{
+    margin-top:40px;
+    margin-bottom:50px;
+  }
+  .toppage-link, .dropdown-toggle, .dropdown-item{
+    font-size:100%;
+  }
+
+}

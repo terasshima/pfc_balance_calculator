@@ -1,0 +1,79 @@
+
+#title{
+  margin-top:60px;
+  margin-bottom:50px;
+}
+
+#summary{
+  padding-top:30px;
+  padding-bottom:30px;
+}
+
+#aboutPfc p{
+  margin-top:20px;
+}
+
+#aboutApp{
+  padding-top:50px;
+}
+
+.aboutApp-content{
+  margin-top:20px;
+}
+
+.content-text{
+  margin-top:20px;
+}
+
+
+/* レスポンシブ */
+
+/*  幅480以下（スマホ縦）はそのまま */
+
+
+@media screen and (min-width:480px) {
+  #title{
+    margin-top:80px;
+    margin-bottom:80px;
+  }
+  #summary{
+    padding-top:50px;
+    padding-bottom:50px;
+  }
+  #aboutPfc p{
+    margin-top:30px;
+  }
+  #aboutApp{
+    padding-top:80px;
+  }
+  .aboutApp-content{
+    margin-top:40px;
+  }
+  .content-text{
+    margin-top:30px;
+  }
+}
+
+
+@media screen and (min-width:1024px) {
+  #title{
+    margin-top:100px;
+    margin-bottom:100px;
+  }
+  #summary{
+    padding-top:70px;
+    padding-bottom:70px;
+  }
+  #aboutPfc p{
+    margin-top:50px;
+  }
+  #aboutApp{
+    padding-top:100px;
+  }
+  .aboutApp-content{
+    margin-top:60px;
+  }
+  .content-text{
+    margin-top:30px;
+  }
+}
