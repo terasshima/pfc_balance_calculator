@@ -14,7 +14,8 @@
   $link = mysqli_connect($db_hostname,$db_username,$db_password,$db_name);
 
   if(mysqli_connect_error()){
-    input_error("データベースに接続できませんでした");
+    alert("データベースに接続できませんでした");
+    goto jump;
   }else{
     mysqli_set_charset($link, 'utf8');
   }
@@ -47,31 +48,36 @@
   $query = "SELECT `id` FROM `users` WHERE `email` = '".mysqli_real_escape_string($link, $email)."'";
   $result = mysqli_query($link, $query);
   if(mysqli_num_rows($result) > 0){
-    input_error("入力されたメールアドレスはすでに登録されています");
+    alert("入力されたメールアドレスはすでに登録されています");
+    goto jump;
   }
 
 
   //2つのpassが一致しているか
   if($pass1 != $pass2){
-    input_error("パスワードが一致していません");
+    alert("パスワードが一致していません");
+    goto jump;
   }
 
 
   //年齢に数値が入力されているか,5~120歳か
   if(!is_numeric($age) || $age < 5 || $age > 120){
-    input_error("年齢を正しく入力してください");
+    alert("年齢を正しく入力してください");
+    goto jump;
   }
 
 
   //身長に数値が入力されているか,100.0~200.0cmか
   if(!is_numeric($height) || $height < 100.0 || $height >200.0){
-    input_error("身長を正しく入力してください");
+    alert("身長を正しく入力してください");
+    goto jump;
   }
 
 
   //体重に数値が入力されているか,15.0~500.0kgか
   if(!is_numeric($weight) || $weight < 15.0 || $weight >500.0){
-    input_error("体重を正しく入力してください");
+    alert("体重を正しく入力してください");
+    goto jump;
   }
 
 
@@ -185,6 +191,12 @@
   header('location:../check/index.php');
   exit;
 
+
+
+  //ジャンプ先
+  jump:
+  require_once("index.php");
+  exit;
 
 
 /*
