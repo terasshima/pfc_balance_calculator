@@ -4,15 +4,12 @@
   require("../function.php");
 
 
+  //データベース接続,確認,文字化け防止
   $db_hostname = getenv("DB_HOSTNAME");
   $db_username = getenv("DB_USERNAME");
   $db_password = getenv("DB_PASSWORD");
   $db_name = getenv("DB_NAME");
 
-
-
-
-  //データベース接続,接続確認,文字化け防止
   $link = mysqli_connect($db_hostname,$db_username,$db_password,$db_name);
 
   if(mysqli_connect_error()){
