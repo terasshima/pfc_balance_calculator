@@ -1,4 +1,4 @@
-# pfc_balance_calculator
+# PFCバランス計算app
 
 ## Overview
 三大栄養素（pfc）のバランス計算アプリ
